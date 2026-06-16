@@ -9,14 +9,6 @@
         <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Pelaporan Akuntansi & General Ledger</h2>
         <p class="text-sm text-slate-500 mt-1">Laporan double-entry otomatis untuk audit keuangan Fikra Academy.</p>
     </div>
-    <div>
-        <a id="export-excel-btn" href="{{ route('export.excel', request()->all()) }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3 rounded-xl text-sm transition-all shadow-md shadow-emerald-600/10 flex items-center gap-2">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            Ekspor Jurnal Umum (Excel)
-        </a>
-    </div>
 </div>
 
 <!-- Tabs Navigation Header -->
@@ -47,6 +39,15 @@
             <form action="{{ route('accounting.index') }}" method="GET" class="flex flex-wrap items-center gap-3">
                 <input type="hidden" name="active_tab" value="tab-gl">
                 <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Siswa</label>
+                    <select name="student" class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs bg-white focus:outline-[#1e3a8a]">
+                        <option value="">-- Semua Siswa --</option>
+                        @foreach($students as $student)
+                            <option value="{{ $student->name }}" {{ request('student') == $student->name ? 'selected' : '' }}>{{ $student->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Bulan SPP</label>
                     <select name="period_month" class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs bg-white focus:outline-[#1e3a8a]">
                         <option value="">-- Semua Bulan --</option>
@@ -76,6 +77,24 @@
                 </div>
             </form>
         </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200/60 rounded-xl p-4">
+            <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Ekspor Laporan Neraca Saldo (Trial Balance)</div>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('export.excel', request()->all()) }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor Excel
+                </a>
+                <a href="{{ route('export.gl.pdf', request()->all()) }}" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor PDF
+                </a>
+            </div>
+        </div>
+
 
         <!-- GL Table -->
         <div class="overflow-x-auto rounded-xl border border-slate-200">
@@ -154,6 +173,24 @@
             </div>
         </div>
 
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200/60 rounded-xl p-4">
+            <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Ekspor Laporan Neraca Saldo (Trial Balance)</div>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('export.tb.excel', request()->all()) }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor Excel
+                </a>
+                <a href="{{ route('export.tb.pdf', request()->all()) }}" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor PDF
+                </a>
+            </div>
+        </div>
+
         <div class="overflow-x-auto rounded-xl border border-slate-200">
             <table class="w-full border-collapse text-left text-sm">
                 <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
@@ -218,6 +255,24 @@
     <!-- TAB 3: LABA RUGI -->
     <!-- ============================================== -->
     <div id="tab-lr" class="tab-content hidden max-w-3xl mx-auto space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200/60 rounded-xl p-4">
+            <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Ekspor Laporan Laba Rugi (Profit & Loss)</div>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('export.lr.excel', request()->all()) }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor Excel
+                </a>
+                <a href="{{ route('export.lr.pdf', request()->all()) }}" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor PDF
+                </a>
+            </div>
+        </div>
+
         <div class="border border-slate-200 shadow-sm rounded-2xl overflow-hidden bg-white">
             <div class="bg-[#1e3a8a] text-white p-6 text-center">
                 <h3 class="text-xl font-bold tracking-tight">LAPORAN LABA RUGI</h3>
@@ -307,6 +362,24 @@
     <!-- TAB 4: REKONSILIASI KAS & BANK -->
     <!-- ============================================== -->
     <div id="tab-reconcile" class="tab-content hidden space-y-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-50 border border-slate-200/60 rounded-xl p-4">
+            <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">Ekspor Laporan Arus Kas (Rekonsiliasi Kas & Bank)</div>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('export.lak.excel', request()->all()) }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor Excel
+                </a>
+                <a href="{{ route('export.lak.pdf', request()->all()) }}" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-3 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Ekspor PDF
+                </a>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- KAS KECIL WALLET LEDGER -->

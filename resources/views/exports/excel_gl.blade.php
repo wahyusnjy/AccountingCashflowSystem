@@ -3,12 +3,12 @@
         <!-- Title Banner -->
         <tr>
             <th colspan="6" style="font-size: 16px; font-weight: bold; text-align: center; height: 30px; vertical-align: middle;">
-                LAPORAN JURNAL UMUM (GENERAL LEDGER)
+                FIKRA ACADEMY
             </th>
         </tr>
         <tr>
             <th colspan="6" style="font-size: 12px; text-align: center; height: 20px; vertical-align: middle;">
-                CASHFLOW BIMBEL
+                GENERAL JURNAL
             </th>
         </tr>
         <tr>

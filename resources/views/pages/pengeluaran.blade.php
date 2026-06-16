@@ -9,7 +9,13 @@
         <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">Manajemen & Riwayat Pengeluaran</h2>
         <p class="text-sm text-slate-500 mt-1">Daftar historis pengeluaran kas bimbel dan pencatatan nota operasional.</p>
     </div>
-    <div>
+    <div class="flex items-center gap-2">
+        <a href="{{ route('export.slip.gaji.blank') }}" class="bg-slate-600 hover:bg-slate-700 text-white font-bold px-4 py-3 rounded-xl text-sm transition-all shadow-md flex items-center gap-2">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Slip Gaji Kosong (PDF)
+        </a>
         <button id="add-pengeluaran-btn" onclick="toggleModal('pengeluaranModal', true)" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-5 py-3 rounded-xl text-sm transition-all shadow-md shadow-rose-600/10 flex items-center gap-2">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -68,6 +74,7 @@
                     <th class="p-4 text-xs uppercase tracking-wider text-right">Jumlah (Rp)</th>
                     <th class="p-4 text-xs uppercase tracking-wider text-center">Sumber Dana</th>
                     <th class="p-4 text-xs uppercase tracking-wider text-center">Status</th>
+                    <th class="p-4 text-xs uppercase tracking-wider text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
@@ -102,10 +109,22 @@
                                 Pengeluaran Lunas
                             </span>
                         </td>
+                        <td class="p-4 text-center">
+                            @if($debitEntry && $debitEntry->account_id === '5.16.01.01')
+                                <a href="{{ route('export.slip.gaji', $tx->id) }}" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold px-3 py-1.5 rounded-lg text-xs transition-all inline-flex items-center gap-1 justify-center">
+                                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    Cetak Slip
+                                </a>
+                            @else
+                                <span class="text-slate-400 font-light">&mdash;</span>
+                            @endif
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="p-8 text-center text-slate-400 italic">
+                        <td colspan="7" class="p-8 text-center text-slate-400 italic">
                             Belum ada riwayat pengeluaran operasional yang tercatat.
                         </td>
                     </tr>
